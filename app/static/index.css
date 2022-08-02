@@ -1,3 +1,7 @@
+body{
+    color: gray
+}
+
 h1{
     color: green;
     margin-top: 5px;
@@ -21,4 +25,5 @@ p{
 }
 li{
     font-size: 25px;
+    margin-top: 5%;
 }
