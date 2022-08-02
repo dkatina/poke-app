@@ -1,5 +1,5 @@
 body{
-    color: green
+    color: rgb(5, 105, 5)
 }
 
 h1{
@@ -22,7 +22,7 @@ h1{
 
 p{
     font-size: 18px;
-    font-weight: 15px;
+    font-weight: 400;
 }
 li{
     font-size: 25px;
