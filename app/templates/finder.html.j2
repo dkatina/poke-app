@@ -1,0 +1,49 @@
+{% extends 'base.html.j2'%}
+
+{% block css%}
+<link rel="stylesheet" href="{{url_for('static', filename='finder.css')}}">
+{%endblock%}
+
+{% block title%}
+    Poke Finder
+{% endblock %}
+
+
+{% block content %}
+<h1>Poke Finder</h1>
+<form action="{{url_for('finder')}}" method='POST'>
+    <div class="mb-3">
+        {{form.poke_name.label(class="form-label")}}
+        {{form.poke_name(class="form-control")}}
+        {% for error in form.poke_name.errors%}
+            <small style="color:red">{{error}}</small>
+        {% endfor %}
+    </div>
+    <div>
+        {{form.submit(class="btn btn-success")}}<br>
+         <small style="color:red">{{error}}</small>
+    </div>
+</form>
+
+{% if poke %}
+
+<div class="set">
+    <div class="left">
+        <h1>{{name}}</h1>
+        <img src={{poke.Sprite}}>
+    </div>
+    <div class="right">
+        <div class="stat-pack">
+            <h2>Stats</h2>
+            <p>Passive: {{poke.Ability}}</p>
+            <p>Base Exp: {{poke.BaseExp}}</p>
+            <p>Base Attack Power: {{poke.BaseAttk}}</p>
+            <p>Base Hit Points: {{poke.BaseHP}}</p>
+            <p class='bottom'>Base Defense: {{poke.BaseDef}}</p>
+        </div>
+    </div>
+</div>
+
+{%endif%}
+
+{%endblock%}

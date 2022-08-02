@@ -1,0 +1,51 @@
+
+h1{
+    color: green;
+    margin-top: 5px;
+}
+
+.set{
+    display: flex;
+    margin-top: 4%
+
+}
+
+.left{
+    margin-left: 15%;
+}
+
+.right{
+    margin-left: 10%;
+    margin-top: 5%;
+
+}
+
+img{
+    margin: 0 auto;
+}
+
+.stat-pack{
+    background-color: green;
+    width: 150%;
+    color: white;
+    border-radius: 15px;
+}
+p{
+    border-top: white solid 1px;
+    padding: 10% 0 10% 5%;
+    margin: 0;
+}
+
+p:hover{
+    background-color: rgba(255, 255, 255, 0.171);
+}
+
+h2{
+    padding-top: 4%;
+    padding-left: 5%;
+}
+
+.bottom{
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
