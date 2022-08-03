@@ -42,7 +42,7 @@ def register():
         try:
             new_user = {
                 "first_name": form.first_name.data.title(),
-                "last_name": form.first_name.data.title(),
+                "last_name": form.last_name.data.title(),
                 "email": form.email.data.lower(),
                 "password": form.password.data,
                 "icon": form.icon.data
@@ -67,7 +67,7 @@ def edit_user():
     if request.method == 'POST' and form.validate_on_submit():
         edited_user = {
             "first_name": form.first_name.data.title(),
-            "last_name": form.first_name.data.title(),
+            "last_name": form.last_name.data.title(),
             "email": form.email.data.lower(),
             "password": form.password.data,
             "icon": form.icon.data if int(form.icon.data) != 9000 else current_user.icon
