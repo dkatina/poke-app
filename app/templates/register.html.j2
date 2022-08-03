@@ -1,0 +1,60 @@
+{% extends 'base.html.j2'%}
+
+{% block css%}
+<link rel="stylesheet" href="{{url_for('static', filename='css/form.css')}}">
+{%endblock%}
+
+{% block title %}
+    {% if current_user.is_authenticated %}
+        Edit Profile
+    {% else %}
+        Register
+    {%endif%}
+{% endblock%}
+
+
+{%block content%}
+    <h1>
+        {% if current_user.is_authenticated %}
+            Edit Profile
+        {% else %}
+            Register
+        {%endif%}
+    </h1>
+
+    <form action="{{ url_for('edit_user') if current_user.is_authenticated else url_for('register')}}" method="POST">
+        {{form.hidden_tag()}}
+        <div class="form">
+            {{form.icon.label(class="form-label")}}
+            <div>
+                {%for subfield in form.icon %}
+                    {{subfield}}
+                    {{subfield.label | safe}}
+                {%endfor%}
+            </div>
+        </div>
+        <div class="form">
+            {{form.first_name.label(class="form-label")}}
+            {{form.first_name(class="form-control", value=current_user.first_name)}}
+        </div>
+        <div class="form" >
+            {{form.last_name.label(class="form-label")}}
+            {{form.last_name(class="form-control", value=current_user.last_name)}}
+        </div>
+        <div class="form">
+            {{form.email.label(class="form-label")}}
+            {{form.email(class="form-control", value=current_user.email_name)}}
+        </div>
+        <div class="form">
+            {{form.password.label(class="form-label")}}
+            {{form.password(class="form-control")}}
+        </div>
+        <div class="form">
+            {{form.confirm_password.label(class="form-label")}}
+            {{form.confirm_password(class="form-control")}}
+        </div>
+        <div class="form">
+            {{form.submit(class="btn btn-success")}}
+        </div>
+    </form>
+{%endblock%}

@@ -59,7 +59,7 @@ def register():
         flash("Successfully registered", "success")
         return redirect(url_for('login'))
     
-    render_template('register.html.j2', form=form)
+    return render_template('register.html.j2', form=form)
 
 @app.route('/edit_user', methods=['GET', 'POST'])
 def edit_user():
@@ -74,7 +74,7 @@ def edit_user():
         }
         user = User.query.filter_by(email=edited_user['email']).first()
         if user and user.email != current_user.email:
-            flash('NOOOO!!! Silly', 'danger')
+            flash("Silly Goose that's not your email!", 'danger')
             return redirect('edit_user')
         try:
             current_user.from_dict(edited_user)
@@ -82,7 +82,7 @@ def edit_user():
             flash("Profile Updated, Maybe next time don't Screw-up during registration", "info")
         except:
             flash("Unexpected Error occured", 'danger')
-            return redirect('edit_user')
+            return redirect(url_for('edit_user'))
         return redirect(url_for('index'))
     return render_template('register.html.j2',form=form)
 
@@ -94,10 +94,10 @@ def login():
         password = form.password.data
 
         user = User.query.filter_by(email=email).first()
-        if user and user.check_password_hash(password):
+        if user and user.check_pass(password):
             flash('Welcome', 'success')
             login_user(user)
-            return redirect('index')
+            return redirect(url_for('index'))
         flash('Incorrect Email or Password', 'danger')
         return render_template('login.html.j2', form=form)
     return render_template('login.html.j2' , form=form)

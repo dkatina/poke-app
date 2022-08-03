@@ -1,0 +1,29 @@
+{% extends 'base.html.j2'%}
+
+{% block css%}
+<link rel="stylesheet" href="{{url_for('static', filename='css/form.css')}}">
+{%endblock%}
+
+{% block title %}
+    Login
+{% endblock%}
+
+
+{%block content%}
+    <h1>Login</h1>
+    <form action="{{url_for('login')}}" method="POST">
+        {{form.hidden_tag()}}
+        <div class="form">
+            {{form.email.label(class="form-label")}}
+            {{form.email(class="form-control")}}
+        </div>
+        <div class="form">
+            {{form.password.label(class="form-label")}}
+            {{form.password(class="form-control")}}
+        </div>
+        <div class="form">
+            {{form.submit(class="btn btn-success")}}
+        </div>
+    </form>
+
+{% endblock %}

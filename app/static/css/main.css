@@ -4,3 +4,7 @@ body{
 img{
     width: 100%
 }
+.shower{
+    margin: 0 auto;
+    width: 67.5%;
+}
