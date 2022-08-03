@@ -47,12 +47,6 @@ class RegisterForm(FlaskForm):
         if user_with_email:
             return ValidationError('Account already registered under this email address')
 
-class LoginForm(FlaskForm):
-#  variable Field Type   Lable             Validators
-    email = StringField('Email Address', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    submit = SubmitField('Login')
-
 
 
 class EditProfileForm(FlaskForm):
