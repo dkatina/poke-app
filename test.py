@@ -17,7 +17,7 @@ this_poke = {
 }
 print(this_poke)
 
-{# <form action="{{url_for('finder')" method="POST">
+{# <form action="{{url_for('pokemon.finder')" method="POST">
     {{form.hidden_tag}}
     <div class="mb-3">
         {{form.poke_name.label(class="form-label")}}

@@ -1,7 +1,7 @@
 {% extends 'base.html.j2'%}
 
 {% block css%}
-<link rel="stylesheet" href="{{url_for('static', filename='cssfinder.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='css/finder.css')}}">
 {%endblock%}
 
 {% block title%}
@@ -11,7 +11,7 @@
 
 {% block content %}
 <h1>Poke Finder</h1>
-<form action="{{url_for('finder')}}" method='POST'>
+<form action="{{url_for('pokemon.finder')}}" method='POST'>
 {{form.hidden_tag()}}
     <div class="mb-3">
         {{form.poke_name.label(class="form-label")}}
@@ -28,22 +28,29 @@
 
 {% if poke %}
 
-<div class="set">
-    <div class="left">
-        <h1>{{name}}</h1>
-        <img src={{poke.Sprite}}>
-    </div>
-    <div class="right">
-        <div class="stat-pack">
-            <h2>Stats</h2>
-            <p>Passive: {{poke.Ability}}</p>
-            <p>Base Exp: {{poke.BaseExp}}</p>
-            <p>Base Attack Power: {{poke.BaseAttk}}</p>
-            <p>Base Hit Points: {{poke.BaseHP}}</p>
-            <p class='bottom'>Base Defense: {{poke.BaseDef}}</p>
+    <div class="set">
+        <div class="left">
+            <h1>{{name}}</h1>
+            <img src={{poke.Sprite}}>
+            {% if space_in_team %}
+                <a href="{{url_for('pokemon.catch_pokemon', poke_name=name)}}" class="btn btn-success">Catch</a>
+            {%else%}
+                <p style="color:red">You're team is full make space to add {{name}}</p>
+            {%endif%}
+        </div>
+        <div class="right">
+            <div class="stat-pack">
+                <h2>Stats</h2>
+                <p>Passive: {{poke.Ability}}</p>
+                <p>Base Exp: {{poke.BaseExp}}</p>
+                <p>Base Attack Power: {{poke.BaseAttk}}</p>
+                <p>Base Hit Points: {{poke.BaseHP}}</p>
+                <p class='bottom'>Base Defense: {{poke.BaseDef}}</p>
+            </div>
         </div>
     </div>
-</div>
+
+
 
 {%endif%}
 

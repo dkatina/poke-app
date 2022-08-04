@@ -1,17 +1,9 @@
-from email import message
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, RadioField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
-from app import app
-from .models import User
+from app.models import User
 import random
 from jinja2.utils import markupsafe
-
-
-
-class PokeForm(FlaskForm):
-    poke_name = StringField('Pokemon Name', validators=[DataRequired()])
-    submit = SubmitField('Find Pokemon')
 
 class LoginForm(FlaskForm):
 #  variable Field Type   Lable             Validators
@@ -46,7 +38,6 @@ class RegisterForm(FlaskForm):
         user_with_email = User.query.filter_by(email=field.data).first()
         if user_with_email:
             return ValidationError('Account already registered under this email address')
-
 
 
 class EditProfileForm(FlaskForm):
