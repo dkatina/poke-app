@@ -3,6 +3,13 @@ from flask_login import UserMixin #Specific to User Class model
 from datetime import datetime as dt
 from werkzeug.security import generate_password_hash, check_password_hash
 
+team = db.Table('team',
+    db.Column('trainer_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('pokemon_name', db.String, db.ForeignKey('pokemon.name')),
+)
+
+
+
 class User(UserMixin, db.Model):
     __tablename__ = 'user'
 
@@ -13,7 +20,7 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String)
     icon = db.Column(db.Integer)
     created_on = db.Column(db.DateTime, default=dt.utcnow)
-    pokemon = db.relationship('Pokemon', backref='master', lazy='dynamic')
+    pokemon = db.relationship('Pokemon', secondary=team, backref='trainer', lazy='dynamic')
 
     def __repr__(self): #Talks to machine
         return f'< User: {self.email} | {self.id}>'
@@ -44,33 +51,43 @@ class User(UserMixin, db.Model):
     def get_icon_url(self):
         return f"http://avatars.dicebear.com/api/croodles/{self.icon}.svg"
 
+    def catch_poke(self, poke):
+        self.pokemon.append(poke)
+        db.session.commit()
+
+    def release(self, poke):
+        self.pokemon.remove(poke)
+        db.session.commit()
+
+    def check_team(self):
+        return len(self.pokemon.all()) < 6
+       
+    
+    def in_my_team(self, poke):
+        return poke in self.pokemon
+   
+
+
+
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
 
 class Pokemon(db.Model):
     __tablename__ = 'pokemon'
-
-    id= db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
+    name = db.Column(db.String, primary_key=True)
     ability = db.Column(db.String)
     exp = db.Column(db.String)
     attk = db.Column(db.String)
     hp = db.Column(db.String)
     defense = db.Column(db.String)
     sprite = db.Column(db.String)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    date_caught = db.Column(db.DateTime, default=dt.utcnow)
 
     def __repr__(self):
-        return f"<Pokemon: {self.id} | {self.name}>"
+        return f"<Pokemon: {self.name} | {self.ability}>"
 
     def save(self):
         db.session.add(self)
-        db.session.commit()
-    
-    def release(self):
-        db.session.delete(self)
         db.session.commit()
 
     def from_dict(self, poke_dict):
@@ -81,5 +98,4 @@ class Pokemon(db.Model):
         self.hp = poke_dict['BaseHP']
         self.defense = poke_dict['BaseDef']
         self.sprite = poke_dict['Sprite']
-        self.user_id = poke_dict['User_id']
 

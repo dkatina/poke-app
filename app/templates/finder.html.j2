@@ -35,7 +35,7 @@
             {% if space_in_team %}
                 <a href="{{url_for('pokemon.catch_pokemon', poke_name=name)}}" class="btn btn-success">Catch</a>
             {%else%}
-                <p style="color:red">You're team is full make space to add {{name}}</p>
+                <p style="color:red">You're team is full <a style="color:red" href="{{url_for('pokemon.my_team')}}">make space</a> to add {{name}}</p>
             {%endif%}
         </div>
         <div class="right">

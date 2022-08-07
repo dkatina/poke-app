@@ -1,5 +1,5 @@
 <div class="card" style="width: 18rem;">
-  <img src="{{poke.sprite}}" class="card-img-top" alt="pokemon_image">
+  <img src="{{poke.sprite}}" class="card-img-top piccy" alt="pokemon_image" style="background-image: url('https://res.cloudinary.com/dc0hokgpp/image/upload/v1659618910/pokemon%20pics/IMG_0122_geisoo.jpg')">
   <div class="card-body">
     <h5 class="card-title">{{poke.name}}</h5>
   </div>
@@ -11,8 +11,8 @@
     <li class="list-group-item">Deffense: {{poke.defense}}</li>
   </ul>
   <div class="card-body">
-    {% if poke.user_id == current_user.id %}
-    <a href="{{url_for('pokemon.release_pokemon', id=poke.id)}}" class="btn btn-warning">Release</a>
+    {% if poke in current_user.pokemon.all() %}
+    <a href="{{url_for('pokemon.release_pokemon', name=poke.name)}}" class="btn btn-warning">Release</a>
     {# <a href="{{url_for('pokemon.release_pokemon', id=poke.id)}}" class="btn btn-warning">Rename</a> #}
     {% endif %}
   </div>
