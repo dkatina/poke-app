@@ -2,6 +2,11 @@
 
 {% block css%}
 <link rel="stylesheet" href="{{url_for('static', filename='css/results.css')}}">
+    {%if winner.id == current_user.id%}
+        <link rel="stylesheet" href="{{url_for('static', filename='css/red.css')}}">
+    {%else%}
+        <link rel="stylesheet" href="{{url_for('static', filename='css/blue.css')}}">
+    {%endif%}
 {%endblock%}
 
 {%block title%}
@@ -25,10 +30,12 @@
         {%if winner.id == current_user.id%}
             <h1>Nice Job {{winner.first_name}} You Won</h1>
             <img src="{{winner.get_icon_url()}}" alt="player">
+            <h1>Your record is now Wins: {{current_user.wins}} Loses: {{current_user.loses}}</h1>
         {% else %}
             <h1>Wow {{current_user.first_name}}...You SUCK!</h1>
             <img src="{{winner.get_icon_url()}}" alt="player">
             <h1>{{winner.first_name}} Won the Match</h1>
+            <h1>Your record is now Wins: {{current_user.wins}} Loses: {{current_user.loses}}</h1>
         {% endif %}
     </div>
 {%endblock%}

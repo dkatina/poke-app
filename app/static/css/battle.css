@@ -1,7 +1,5 @@
 .divider{
     display: flex;
-    margin-top: 1%;
-
 }
 .pokemon{
     height: 16.5%;
@@ -23,11 +21,32 @@ p{
 }
 .versus{
     width: 70%;
-    margin-top: 17%;
+    padding-top: 22.5%;
+    background-image: url('https://res.cloudinary.com/dc0hokgpp/image/upload/v1659966091/pokemon%20pics/justin-williams-justin-williams-pm-arena-shrine-final102519-2_asu56y.jpg');
+    padding-left: 4%;
+    height: 89.5vh;
 }
-h2{
-    padding-top: 10%;
+
+
+
+   
+h1{
+    padding-top: 7%;
 }
+
+.me > h1{
+    background: -webkit-linear-gradient(135deg,red,rgb(255, 208, 0));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.them > h1{
+    background: -webkit-linear-gradient(135deg,rgb(119, 0, 255),rgb(0, 47, 255));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
 .my_face{
     width: 40%;
     padding-right: 10%;
@@ -40,4 +59,29 @@ h2{
     width: 40%;
     padding-left: 10%;
     margin-left: -10%;
+}
+body{
+    background-color: rgb(29, 92, 76);
+}
+
+.b-but{
+    margin-left: 43%;
+    margin-top: 30%;
+    background: -webkit-linear-gradient(45deg, red,blue);
+    border: none;
+}
+
+.my_team > .pokemon{
+    background-color: rgb(216, 49, 49);
+    color: white;
+}
+
+.their_team > .pokemon{
+    background-color: rgb(71, 121, 230);
+    color: white
+}
+.vs > h1{
+    background: -webkit-linear-gradient(red, red, blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

@@ -28,22 +28,22 @@
                 {% include './includes/_battlepoke.html.j2'%}
             {% endfor %}
         </div>
-        <div class='versus'>
-            <div class='me'>
-                <img src="{{me.get_icon_url()}}" class="my_face">
-                <h2>{{me.first_name}}</h2>
+            <div class='versus'>
+                <div class='me'>
+                    <img src="{{me.get_icon_url()}}" class="my_face">
+                    <h1>{{me.first_name}}</h1>
+                </div>
+                <div class='vs'>
+                    <h1>VS</h1>
+                </div>
+                <div class='them'>
+                    <h1>{{trainer.first_name}}</h1>
+                    <img src="{{trainer.get_icon_url()}}" class="their_face">
+                </div>
+                <div>
+                    <a href="{{url_for('pokemon.results', id=trainer.id)}}" class="btn btn-danger b-but">FIGHT!</a>
+                </div>
             </div>
-            <div class='vs'>
-                <h1>VS</h1>
-            </div>
-            <div class='them'>
-                <h2>{{trainer.first_name}}</h2>
-                <img src="{{trainer.get_icon_url()}}" class="their_face">
-            </div>
-            <div>
-                <a href="{{url_for('pokemon.results', id=trainer.id)}}" class="btn btn-danger b-but">FIGHT!</a>
-            </div>
-        </div>
         <div class='their_team'>
             {%for pokemon in trainer.pokemon%}
                 {% include './includes/_battlepoke.html.j2'%}
