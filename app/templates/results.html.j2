@@ -21,14 +21,14 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-    <div class="container">
+    <div class="container holder">
         {%if winner.id == current_user.id%}
             <h1>Nice Job {{winner.first_name}} You Won</h1>
             <img src="{{winner.get_icon_url()}}" alt="player">
         {% else %}
-            <h1>Wow {{winner.first_name}}...You SUCK!</h1>
+            <h1>Wow {{current_user.first_name}}...You SUCK!</h1>
             <img src="{{winner.get_icon_url()}}" alt="player">
-            <h2>{{winner.name}} Won the Match</h2>
+            <h1>{{winner.first_name}} Won the Match</h1>
         {% endif %}
     </div>
 {%endblock%}

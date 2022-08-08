@@ -79,6 +79,7 @@ def my_team():
     return render_template('my_team.html.j2', pokemon=current_user.pokemon.all())
 
 @pokemon.route('/release_pokemon/<name>')
+@login_required
 def release_pokemon(name):
     poke = Pokemon.query.get(name)
     print(poke)
@@ -92,14 +93,17 @@ def release_pokemon(name):
 
 
 @pokemon.route('/browse_trainers')
+@login_required
 def browse_trainers():
     return render_template('browse_trainers.html.j2', trainers=User.query.filter(User.id!=current_user.id).all(), me=User.query.get(current_user.id))
 
 @pokemon.route('/battle/<id>')
+@login_required
 def battle(id):
     return render_template('battle.html.j2', me=User.query.get(current_user.id), trainer=User.query.get(id))
 
 @pokemon.route('/results/<id>')
+@login_required
 def results(id):
     trainer = User.query.get(id)
     hp1= 0
@@ -122,13 +126,19 @@ def results(id):
     hp2-=attk1
     if hp1 >= hp2:
         current_user.wins += 1
-        trainer.loses -= 1
+        trainer.loses += 1
         current_user.save()
         trainer.save()
         return render_template('results.html.j2', winner=current_user)
     else:
-        current_user.wins -= 1
-        trainer.loses += 1
+        current_user.loses += 1
+        trainer.wins += 1
         current_user.save()
         trainer.save()
         return render_template('results.html.j2', winner=trainer)
+
+@pokemon.route('/this_trainer/<id>')
+@login_required
+def this_trainer(id):
+    trainer = User.query.get(id)
+    return render_template('this_trainer.html.j2', pokemon=trainer.pokemon.all(), trainer=trainer)

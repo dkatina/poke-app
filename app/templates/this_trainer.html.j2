@@ -1,0 +1,18 @@
+{% extends 'base.html.j2'%}
+
+{% block css%}
+<link rel="stylesheet" href="{{url_for('static', filename='css/pokemon.css')}}">
+{%endblock%}
+
+{%block title%}
+    {{trainer.first_name}}'s Team
+{%endblock%}
+
+{%block content%}
+    <h1>{{trainer.first_name}}'s Team</h1>
+    <div class="cards">
+        {%for poke in pokemon%}
+        {% include './includes/_pokemon.html.j2'%}
+        {%endfor%}
+    <div>
+{%endblock%}

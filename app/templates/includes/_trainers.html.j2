@@ -3,9 +3,8 @@
   <div class="row g-0">
     <div class="col-md-3">
       <img src="{{trainer.get_icon_url()}}" class="img-fluid rounded-start" alt="trainer image">
-      <a href="{{url_for('pokemon.battle', id=trainer.id)}}" class="btn btn-danger b-but">Battle!</a>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-5">
       <div class="card-body">
         <h5 class="card-title">{{trainer.first_name}} {{trainer.last_name}}</h5>
         <p class="card-text"><small class="text-muted">Wins: {{trainer.wins}} Loses: {{trainer.loses}}</small></p>
@@ -16,7 +15,9 @@
         </div>
       </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-3">
+      <a href="{{url_for('pokemon.battle', id=trainer.id)}}" class="btn btn-danger b-but top">Battle!</a>
+      <a href="{{url_for('pokemon.this_trainer', id=trainer.id)}}" class="btn btn-info b-but">Check Out</a>
     </div>
   </div>
 </div>
