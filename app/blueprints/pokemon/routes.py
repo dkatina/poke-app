@@ -1,4 +1,3 @@
-from multiprocessing.context import SpawnContext
 from flask import render_template, request, url_for, flash, redirect
 import requests
 from .forms import *
@@ -94,4 +93,42 @@ def release_pokemon(name):
 
 @pokemon.route('/browse_trainers')
 def browse_trainers():
-    return render_template('browse_trainers.html.j2', trainers=User.query.filter_by(id!=current_user.id).all(), me=User.query.get(current_user.id))
+    return render_template('browse_trainers.html.j2', trainers=User.query.filter(User.id!=current_user.id).all(), me=User.query.get(current_user.id))
+
+@pokemon.route('/battle/<id>')
+def battle(id):
+    return render_template('battle.html.j2', me=User.query.get(current_user.id), trainer=User.query.get(id))
+
+@pokemon.route('/results/<id>')
+def results(id):
+    trainer = User.query.get(id)
+    hp1= 0
+    df1= 0
+    attk1= 0
+    hp2=0
+    df2=0
+    attk2=0
+    for pokemon in current_user.pokemon:
+        hp1+= int(pokemon.hp)
+        df1 += int(pokemon.defense)/100
+        attk1+= int(pokemon.attk)
+    for pokemon in trainer.pokemon:
+        hp2+= int(pokemon.hp)
+        df2 += int(pokemon.defense)/100
+        attk2+= int(pokemon.attk)
+    hp1 *= df1
+    hp2 *= df2
+    hp1-=attk2
+    hp2-=attk1
+    if hp1 >= hp2:
+        current_user.wins += 1
+        trainer.loses -= 1
+        current_user.save()
+        trainer.save()
+        return render_template('results.html.j2', winner=current_user)
+    else:
+        current_user.wins -= 1
+        trainer.loses += 1
+        current_user.save()
+        trainer.save()
+        return render_template('results.html.j2', winner=trainer)

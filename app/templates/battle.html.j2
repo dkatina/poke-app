@@ -1,0 +1,54 @@
+{% extends 'battle_main.html.j2'%}
+
+{% block css%}
+<link rel="stylesheet" href="{{url_for('static', filename='css/battle.css')}}">
+{%endblock%}
+
+{%block title%}
+    FIGHT
+{%endblock%}
+
+{%block content%}
+    {% include './includes/nav.html.j2' %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for class, message in messages %}
+                <div class="shower alert alert-{{class}} alert-dismissible fade show" role="alert">
+                    {{message}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="container">
+    <div class='divider'>
+        <div class='my_team'>
+            {%for pokemon in me.pokemon%}
+                {% include './includes/_battlepoke.html.j2'%}
+            {% endfor %}
+        </div>
+        <div class='versus'>
+            <div class='me'>
+                <img src="{{me.get_icon_url()}}" class="my_face">
+                <h2>{{me.first_name}}</h2>
+            </div>
+            <div class='vs'>
+                <h1>VS</h1>
+            </div>
+            <div class='them'>
+                <h2>{{trainer.first_name}}</h2>
+                <img src="{{trainer.get_icon_url()}}" class="their_face">
+            </div>
+            <div>
+                <a href="{{url_for('pokemon.results', id=trainer.id)}}" class="btn btn-danger b-but">FIGHT!</a>
+            </div>
+        </div>
+        <div class='their_team'>
+            {%for pokemon in trainer.pokemon%}
+                {% include './includes/_battlepoke.html.j2'%}
+            {%endfor%}
+        </div>
+    </div>
+    </div>
+{%endblock%}

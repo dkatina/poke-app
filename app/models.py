@@ -21,6 +21,8 @@ class User(UserMixin, db.Model):
     icon = db.Column(db.Integer)
     created_on = db.Column(db.DateTime, default=dt.utcnow)
     pokemon = db.relationship('Pokemon', secondary=team, backref='trainer', lazy='dynamic')
+    wins = db.Column(db.Integer)
+    loses = db.Column(db.Integer)
 
     def __repr__(self): #Talks to machine
         return f'< User: {self.email} | {self.id}>'
@@ -47,9 +49,11 @@ class User(UserMixin, db.Model):
         self.email = data['email']
         self.icon = data['icon']
         self.password = self.hash_pass(data['password'])   #takes whatever password they gave, hashes it, and stores it 
+        self.wins = data['wins']
+        self.loses = data['loses']
 
     def get_icon_url(self):
-        return f"http://avatars.dicebear.com/api/croodles/{self.icon}.svg"
+        return f"http://avatars.dicebear.com/api/big-smile/{self.icon}.svg"
 
     def catch_poke(self, poke):
         self.pokemon.append(poke)

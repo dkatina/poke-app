@@ -1,0 +1,34 @@
+{% extends 'battle_main.html.j2'%}
+
+{% block css%}
+<link rel="stylesheet" href="{{url_for('static', filename='css/results.css')}}">
+{%endblock%}
+
+{%block title%}
+    Results
+{%endblock%}
+
+{%block content%}
+    {% include './includes/nav.html.j2' %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for class, message in messages %}
+                <div class="shower alert alert-{{class}} alert-dismissible fade show" role="alert">
+                    {{message}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="container">
+        {%if winner.id == current_user.id%}
+            <h1>Nice Job {{winner.first_name}} You Won</h1>
+            <img src="{{winner.get_icon_url()}}" alt="player">
+        {% else %}
+            <h1>Wow {{winner.first_name}}...You SUCK!</h1>
+            <img src="{{winner.get_icon_url()}}" alt="player">
+            <h2>{{winner.name}} Won the Match</h2>
+        {% endif %}
+    </div>
+{%endblock%}

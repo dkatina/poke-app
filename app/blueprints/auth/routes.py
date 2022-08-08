@@ -14,7 +14,9 @@ def register():
                 "last_name": form.last_name.data.title(),
                 "email": form.email.data.lower(),
                 "password": form.password.data,
-                "icon": form.icon.data
+                "icon": form.icon.data,
+                "wins": 0,
+                "loses": 0
             }
             #Creates empty user
             new_user_obj = User()

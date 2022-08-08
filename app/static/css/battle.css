@@ -1,0 +1,43 @@
+.divider{
+    display: flex;
+    margin-top: 1%;
+
+}
+.pokemon{
+    height: 16.5%;
+    width: 100%;
+}
+p{
+    margin-bottom: 1%;
+}
+.me{
+    display: flex;
+    height: 20%;
+    justify-content: left;
+    text-align: center;
+}
+.them{
+    display: flex;
+    height: 20%;
+    justify-content: right;
+}
+.versus{
+    width: 70%;
+    margin-top: 17%;
+}
+h2{
+    padding-top: 10%;
+}
+.my_face{
+    width: 40%;
+    padding-right: 10%;
+    margin-right: -10%
+}
+.vs{
+    text-align: center;
+}
+.their_face{
+    width: 40%;
+    padding-left: 10%;
+    margin-left: -10%;
+}
