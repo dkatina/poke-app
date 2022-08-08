@@ -16,9 +16,9 @@
 
             {%if current_user.is_authenticated%}
             <a class="nav-link" href="{{url_for('pokemon.my_team')}}">My Team</a>
+            <a class="nav-link" href="{{url_for('pokemon.browse_trainers')}}">Browse Trainers</a>
             <a class="nav-link" href="{{url_for('auth.edit_user')}}">Edit User</a>
             <a class="nav-link" href="{{url_for('auth.logout')}}">Logout</a>
-            <a class="nav-link" href="{{url_for('pokemon.browse_trainers')}}">Browse Trainers</a>
             {% endif%}
 
         </div>

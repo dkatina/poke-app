@@ -29,12 +29,12 @@ def finder():
             "BaseAttk":pokemon["stats"][1]['base_stat'],
             "BaseHP":pokemon["stats"][0]['base_stat'],
             "BaseDef":pokemon["stats"][2]['base_stat'],
-            "Sprite":pokemon["sprites"]['other']['official-artwork']["front_default"],
-            "User_id": current_user.id
+            "Sprite":pokemon["sprites"]['other']['official-artwork']["front_default"]
         }
-        
-        return render_template('finder.html.j2', poke=this_poke, name=poke_name.title(), space_in_team=current_user.check_team() ,form=form)
-    
+        if current_user.is_authenticated:
+            return render_template('finder.html.j2', poke=this_poke, name=poke_name.title(), space_in_team=current_user.check_team() ,form=form)
+        else:
+            return render_template('finder.html.j2', poke=this_poke, name=poke_name.title(),form=form)
     return render_template('finder.html.j2', form=form)
 
 @pokemon.route('/catch_pokemon/<poke_name>', methods=['GET', 'POST'])
@@ -122,8 +122,8 @@ def results(id):
         attk2+= int(pokemon.attk)
     hp1 *= df1
     hp2 *= df2
-    hp1-=attk2
-    hp2-=attk1
+    hp1/=attk2
+    hp2/=attk1
     if hp1 >= hp2:
         current_user.wins += 1
         trainer.loses += 1
